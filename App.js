@@ -19,16 +19,17 @@ import {
 } from 'react-native';
 import Navigator from './src/screens/Navigator';
 //import Home  from  './src/Screens/Home'
-// import Navigater from './src/navigation/Navigater';
+import About from './src/navigation/About';
 const App =()=>{
 
   return (
-<View>
-{/* <Navigater/> */}
-   <Navigator/> 
-  {/* <Home/> */}
+
+
+  //  <Navigator/> 
   
-</View>
+  <About/>
+  
+
   );
 };
 

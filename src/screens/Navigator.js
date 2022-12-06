@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import type {Node} from 'react';
-import {Platform, StyleSheet, Text, View, Button, TextInput,Dimensions, TouchableOpacity,Image,ScrollView,Pressable} from 'react-native';
+import {Platform, StyleSheet, Text, View, Button, TextInput,Dimensions, TouchableOpacity,Image,ScrollView,FlatList} from 'react-native';
 // import CheckBox from '@react-native-community/checkbox';
 // import DatePicker from 'react-native-datepicker';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -13,17 +13,17 @@ import FilePicker, { types } from 'react-native-document-picker'
 // import DateTimePickerModal from "react-native-modal-datetime-picker";
 // import moment from 'moment';
 
-const data= [{ label: 'Item 1', value: '1' },
-  { label: 'Item 2', value: '2' },
-  { label: 'Item 3', value: '3' },
-  { label: 'Item 4', value: '4' },
+const data= [{ label: 'Leave List', value: '1' },
+  { label: 'Casual Leave - CL', value: '2' },
+  { label: 'Medical Leave - ML', value: '3' },
+  { label: 'Post Dated Leave - PDL', value: '4' },
   { label: 'Item 5', value: '5' },
   { label: 'Item 6', value: '6' },
   { label: 'Item 7', value: '7' },
   { label: 'Item 8', value: '8' },];
 
 
-const Navigator = ()=>{
+const Navigator = ({navigation})=>{
   // navigation.navigate('Navigater')
   // const [open, setOpen] = useState(false);
   // const [value, setValue] = useState(null);
@@ -119,7 +119,39 @@ const Navigator = ()=>{
  });
  
 
- }       
+ }
+ 
+
+//  const[manth,setManth]=useState("")
+ const[purpose,setPurpose]=useState("")
+ const[address,setAddress]=useState("")
+ const[contact,setContact]=useState("")
+ const[suggetion,setSuggetion]=useState("")
+ const[choose,setChoose]=useState("")
+ const[drop,setDrop]=useState("")
+ //alert(date)
+
+ const handelsubmit=()=>{
+
+     console.log('Hello')
+    
+
+     navigation.navigate('Profile',{
+
+     
+
+         userDate: "12/2/2022",
+        //  userDate:manth,
+         userPurpose:purpose,
+         userAddress:address,
+         userContact:contact,
+         userSuggetion:suggetion,
+         userChoose: choose,
+         userDropdown: "Leave List"
+         
+     })
+    
+ }
        return(
 <ScrollView>
  {/* <View style={styles.container}>
@@ -129,11 +161,14 @@ const Navigator = ()=>{
 </View>  */}
 <View>
 
-<View style={{flex:1, marginTop:0}}>
+{/* <View style={{flex:1, marginTop:0}}>
   <View style={{backgroundColor:"darkolivegreen",height:40,width:"100%",justifyContent:"center",alignItems:"center"}}>
     <Text style={{color:"white",fontWeight:"bold",fontSize:20,paddingBottom:5}}>Leave Application</Text>
   </View>
-</View>
+</View> */}
+{/* <View >
+<Image  source={require('../../assets/images/img4.png') } style={{width:40,height:40}}/>
+</View> */}
 
 <View style={styles.MainContainer}>
    
@@ -191,8 +226,9 @@ const Navigator = ()=>{
   <Text style={{justifyContent:"center",alignItems:"center",marginTop:5,fontWeight:"bold"}}>In case Leaving Headquater</Text> 
 </View>
 {/* </View> */}
-
-<Dropdown 
+<View value={drop} 
+        onChangeText={(text)=> setDrop(text)}>
+<Dropdown         
 // style={{ margin: 16,
 //       height: 50,
 //       borderColor: 'gray',
@@ -221,10 +257,13 @@ style={styles.dropdown}
         value={value}
         onChange={item => {
           setValue(item.value);
+          // alert(value)
+          // alert(value)
         }}
+ 
     />
 
-
+</View>
 
 
 
@@ -255,14 +294,26 @@ style={styles.dropdown}
   <View style={{marginTop:5,marginRight:8}}>
      <Text style={{fontWeight:"bold",marginLeft:1}}>Date from:</Text>
      <View style={{display:"flex",flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
-     <TextInput style={styles.input1} 
+     {/* <TextInput style={styles.input1} 
      placeholder={date.toDateString()}
      
-     />
+     /> */}
+      <View >
+        <TouchableOpacity 
+        onPress={showDatePicker} title='Set Date' 
+        style={{marginTop:3,justifyContent:"center",alignItems:"center"}} 
+       >
+          <Text style={{borderWidth:2, borderColor:"lightgrey",width: 150, textAlign:"center",textAlignVertical:"center",
+        height:45,}} 
+        value={date} 
+        onChangeText={(text)=> setDate(text)}>{date.toDateString()} </Text>
+        </TouchableOpacity>
+        </View>
+
      
-     <TouchableOpacity onPress={showDatePicker} title='Set Date' style={{marginTop:3,justifyContent:"center",alignItems:"center"}}>
+     {/* <TouchableOpacity onPress={showDatePicker} title='Set Date' style={{marginTop:3,justifyContent:"center",alignItems:"center"}}>
      <Image  source={require('../../assets/images/calender.jpg') } style={{width:20,height:30,position:'absolute',right:5}}/>
-     </TouchableOpacity> 
+     </TouchableOpacity>  */}
        
 
      </View>
@@ -276,8 +327,19 @@ style={styles.dropdown}
         {/* <TouchableOpacity onPress={showDatePicker} title='Set Date' style={{marginTop:3,justifyContent:"center",alignItems:"center"}}> */}
      
         {/* <TouchableOpacity onPress={showDatePicker} title='Set Date' style={{marginTop:3,justifyContent:"center",alignItems:"center"}}> */}
+
         
-        <TextInput onFocus={() => showDatePicker()} style={styles.input2} placeholder= {date.toDateString()}/> 
+        {/* <TextInput onFocus={() => showDatePicker()} style={styles.input2} placeholder= {date.toDateString()}/>  */}
+        <View>
+        <TouchableOpacity onPress={showDatePicker} title='Set Date' style={{marginTop:3,justifyContent:"center",alignItems:"center"}} >
+          <Text style={{borderWidth:2, borderColor:"lightgrey",width: 150, textAlign:"center",textAlignVertical:"center",
+        height:45,}}
+        
+        
+        
+        >{date.toDateString()}</Text>
+        </TouchableOpacity>
+        </View>
         
    {/* </TouchableOpacity>  */}
       {/* </View> */}
@@ -292,7 +354,7 @@ style={styles.dropdown}
      <View style={{marginTop:10,}}>
         <Text style={{marginLeft:25,fontWeight:"bold"}}>Purpose:</Text>
         <View style={{justifyContent:"center",alignItems:"center"}}>
-        <TextInput style={styles.input3} placeholder="Enter Your Name"/>
+        <TextInput style={styles.input3} placeholder="Enter Your Purpose" value={purpose} onChangeText={(text)=> setPurpose(text)}/>
         </View>
      </View>
      <View style={{marginLeft:5,display:"flex",flexDirection:"row",marginTop:10,justifyContent:"center",alignItems:"center"}}>
@@ -303,13 +365,13 @@ style={styles.dropdown}
                   <Text style={{marginLeft:2,fontWeight:"bold"}}>Address:</Text>
                 <View style={{marginBottom:10}}>
             <TextInput style={{width:315,height:45, borderWidth:2,marginLeft:2,padding:10, borderColor:"lightgrey"}} 
-     placeholder={date.toDateString()}
+     placeholder="Enter Your Address" value={address} onChangeText={(text)=> setAddress(text)}
      
      />
      </View>
      <Text style={{marginLeft:2,fontWeight:"bold"}}>Contact No:</Text>
             <TextInput style={{width:315,height:45, borderWidth:2,marginLeft:2,padding:10, borderColor:"lightgrey"}} 
-     placeholder={date.toDateString()}
+     placeholder="Enter Your Contact No." value={contact} onChangeText={(text)=> setContact(text)}
      
      />
      </View>
@@ -329,14 +391,15 @@ style={styles.dropdown}
         <TextInput style={styles.input4} placeholder="Enter Your Name"/>
         </View>
      </View> */}
-     <View style={{marginTop:5}}>
+     <View style={{marginTop:10}}>
         <Text style={{marginLeft:25,fontWeight:"bold"}}>Alternative Suggetion:</Text>
         <View style={{justifyContent:"center",alignItems:"center"}}>
-        <TextInput style={styles.input4} placeholder="Enter Your Name"/>
+        <TextInput style={styles.input4} placeholder="Enter Your Alternative Suggetion" value={suggetion} onChangeText={(text)=> setSuggetion(text)}/>
         </View>
      </View>
      <View style={{marginTop:10}}>
-        <Text style={{marginLeft:25,fontWeight:"bold"}}>Attachment(if any):</Text>
+     <View >
+        <Text style={{marginLeft:25,fontWeight:"bold",marginBottom:2}}>Attachment(if any):</Text>
         {/* <View style={{justifyContent:"center",alignItems:"center"}}>
         <TextInput style={styles.input4} placeholder="Choose file"/>
         </View> */}
@@ -353,17 +416,19 @@ style={styles.dropdown}
       ): null} */}
       {fileData.length > 0 ? fileData.map((ls,index)=> {
         return(
-          <View style={{position:"relative",top:45,left:40}} key={index}>
+          <View style={{position:"relative",top:10,left:40}} key={index}>
             {/* <Image source={{uri: ls.uri}} style={{height:100,width:100}}/> */}
-         <Text>Name:{ls.name}</Text> 
+         <Text style={{position:"relative",top:15}}>{ls.name}</Text> 
           </View>
         )
       }): null}
       
       <TouchableOpacity onPress={() => handleFilePicker()} style={{paddingHorizontal:20,paddingVertical:15}}>
-        
-        <Text style={styles.input4}>Choose file </Text>
+        <View style={{marginTop: -20}}>
+        <Text style={styles.input4} value={choose} onChangeText={(text)=> setChoose(text)}>Choose file: </Text>
+        </View>
       </TouchableOpacity>
+     </View>
      </View>
 
      
@@ -378,11 +443,13 @@ style={styles.dropdown}
 </TouchableOpacity>
 </View>
       <View style={{marginLeft:5,justifyContent:"center",alignItems:"center"}}>
-<TouchableOpacity style={{backgroundColor:"deepskyblue",margin:6,width:150,padding:10,borderRadius:8,marginRight:30}}>
-    <Text style={{color:"white",textAlign:"center"}}>Submit</Text>
+<TouchableOpacity style={{backgroundColor:"deepskyblue",margin:6,width:150,padding:10,borderRadius:8,marginRight:30}} 
+>
+
+
+    <Text style={{color:"white",textAlign:"center"}} onPress={()=> handelsubmit()}>Submit</Text>
 </TouchableOpacity>
 </View>
-
 </View>
 </View>
      
@@ -497,7 +564,7 @@ style={styles.datePicker}
         height:45,
         borderWidth: 2,
         borderColor:"lightgrey",
-        // marginTop: 20,
+        marginTop: 3,
         marginLeft:5,
         padding: 10,
         
@@ -508,7 +575,7 @@ style={styles.datePicker}
             height:45,
             borderWidth: 2,
             borderColor:"lightgrey",
-            // marginTop: 20,
+            marginTop: 3,
             marginLeft:5,
             padding: 10,
             
