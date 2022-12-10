@@ -1,19 +1,25 @@
 import React from 'react';
 import 'react-native-gesture-handler';
-import { Button, SafeAreaView, StyleSheet, Text, View,TouchableOpacity,Alert ,Dimensions,Image} from 'react-native';
+import { Button, SafeAreaView, StyleSheet, Text, View,TouchableOpacity,Alert ,Dimensions,Image,HeaderBackButton} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 // import {createStackNavigator} from '@react-navigation/stack';
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
- 
 import Profile from '../../src/screens/Profile';
 import Navigator from '../../src/screens/Navigator';
+// import FontAwesome, {
+//   SolidIcons,
+//   RegularIcons,
+//   BrandIcons,
+//   parseIconFromClassName,
+// } from 'react-native-fontawesome';
+
 
 // const Stack = createStackNavigator();
 // const Stack = createNativeStackNavigator();
 const Stack = createNativeStackNavigator();
-
+//const validIcon = parseIconFromClassName('fa fa-spinner fa-spin')
 
 const About = ({  }) => {
 
@@ -42,6 +48,7 @@ const About = ({  }) => {
           headerShown={true}
           component={Navigator}
         options={({ navigation }) => ({
+           headerTintColor: '#ffffff',
           // title:"Leave Application",
           headerTitle: () => (
               
@@ -49,25 +56,29 @@ const About = ({  }) => {
         <Text style={{ fontWeight: 'bold',fontSize:20,color:"#fff",marginLeft:70}}>Leave Application</Text> 
             </View>),
           headerStyle: {
-            backgroundColor: '#373e5a', //Set Header color
-            // backgroundColor:"green"
-            // backgroundColor:"'#fff'"
+            // backgroundColor: '#373e5a', //Set Header color
+            backgroundColor:"royalblue"
+            // backgroundColor:"#fff"
           },
           headerTintColor: '#fff', //Set Header text color
             headerTitleStyle: {
               fontWeight: 'bold',//Set Header text style
             },
           headerRight: () => (
+            
             <TouchableOpacity
-              onPress={() => navigation.navigate('Profile')} >    
+            
 
-               <Image style={{ width: 50, height: 50,marginLeft:50 }} 
-          source={require("../../assets/images/img4.png")} 
-          
-              />          
+               onPress={() => navigation.navigate('Profile')}  >  
+              
+               {/* <FontAwesome style={{fontSize:24,color:"white"}} icon={validIcon}/> */}
+               <Image style={{ width: 20, height: 20,marginLeft:50,color:"white" }} 
+          source={require("../../assets/images/img12.png")} />          
             </TouchableOpacity>
-          )
+          ),
+        
           })}
+          
         />
 
 
@@ -140,7 +151,21 @@ const About = ({  }) => {
            }} 
        
         /> */}
-        <Stack.Screen name='Profile' component={Profile}/>
+        <Stack.Screen name='Profile' component={Profile} 
+        options={({ navigation }) => ({
+          // title:"Leave Application",
+          headerTintColor: 'white',
+          headerTitle: () => (
+              
+            <View  style={{flexDirection:'row',alignItems:"center",justifyContent:"center"}}>
+        <Text style={{ fontWeight: 'bold',fontSize:20,color:"#fff",marginLeft:40}}>Leave Application</Text> 
+            </View>), headerStyle: {
+            // backgroundColor: '#373e5a', //Set Header color
+            backgroundColor:"royalblue"
+            // backgroundColor:"'#fff'"
+          },
+        
+          })}/>
         {/* <Stack.Screen name='Screen1' component={Screen1}/> */}
         {/* <Stack.Screen name='Screen2' component={Screen2}/> */}
         {/* <Stack.Screen name ="profile" component = {Profile}

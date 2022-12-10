@@ -11,7 +11,7 @@ import FilePicker, { types } from 'react-native-document-picker'
 
 // import DropDownPicker from 'react-native-dropdown-picker';
 // import DateTimePickerModal from "react-native-modal-datetime-picker";
-// import moment from 'moment';
+import moment from 'moment';
 
 const data= [{ label: 'Leave List', value: '1' },
   { label: 'Casual Leave - CL', value: '2' },
@@ -75,6 +75,11 @@ const Navigator = ({navigation})=>{
     };
    
 
+    const getDate=()=>{
+      let newDate=moment(Date(date)).format('12-DD-YYYY');
+      console.log(newDate)
+      return date !== "" ? newDate : "";
+    };
    
 
 
@@ -306,7 +311,11 @@ style={styles.dropdown}
           <Text style={{borderWidth:2, borderColor:"lightgrey",width: 150, textAlign:"center",textAlignVertical:"center",
         height:45,}} 
         value={date} 
-        onChangeText={(text)=> setDate(text)}>{date.toDateString()} </Text>
+        onChangeText={(text)=> setDate(text)}> {getDate()} 
+        </Text>
+{/* <Text>{moment().format("MMM-DD-yyyy ")}</Text> */}
+{/* <Text>{date.toDateString()}</Text> */}
+
         </TouchableOpacity>
         </View>
 
@@ -337,7 +346,8 @@ style={styles.dropdown}
         
         
         
-        >{date.toDateString()}</Text>
+        >{getDate()}</Text>
+        {/* <Text>{date.toDateString()}</Text> */}
         </TouchableOpacity>
         </View>
         
@@ -391,7 +401,7 @@ style={styles.dropdown}
         <TextInput style={styles.input4} placeholder="Enter Your Name"/>
         </View>
      </View> */}
-     <View style={{marginTop:10}}>
+     <View style={{marginTop:2}}>
         <Text style={{marginLeft:25,fontWeight:"bold"}}>Alternative Suggetion:</Text>
         <View style={{justifyContent:"center",alignItems:"center"}}>
         <TextInput style={styles.input4} placeholder="Enter Your Alternative Suggetion" value={suggetion} onChangeText={(text)=> setSuggetion(text)}/>
@@ -443,7 +453,7 @@ style={styles.dropdown}
 </TouchableOpacity>
 </View>
       <View style={{marginLeft:5,justifyContent:"center",alignItems:"center"}}>
-<TouchableOpacity style={{backgroundColor:"deepskyblue",margin:6,width:150,padding:10,borderRadius:8,marginRight:30}} 
+<TouchableOpacity style={{backgroundColor:"royalblue",margin:6,width:150,padding:10,borderRadius:8,marginRight:30}} 
 >
 
 
